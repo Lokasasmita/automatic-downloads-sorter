@@ -25,13 +25,41 @@ cd downloads-sorter
 ```
 
 ---
-## Usage
-### Step 1: Configure the Scripts
-1. Open monitor_downloads.ps1 and update the paths:
-   - Set $pythonScript to the full path of sortDownloads.py.
-   - Set $pythonExecutable to the full path of your Python executable.
-2. Ensure sortDownloads.py is in the same directory or update its location in the PowerShell script.
+# Usage
 
-### Step 2: Run the Monitor Script
-1. Open PowerShell
-2. Ensure sortDownloads.py is in the same directory or update its location in the PowerShell script.
+## Step 1: Configure the Scripts
+
+1. Open `monitor_downloads.ps1` and update the paths:
+   - Set `$pythonScript` to the full path of `sortDownloads.py`.
+   - Set `$pythonExecutable` to the full path of your Python executable.
+2. Ensure `sortDownloads.py` is in the same directory or update its location in the PowerShell script.
+
+## Step 2: Run the Monitor Script
+
+1. Open PowerShell.
+2. Run the monitor script:
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File "path\to\monitor_downloads.ps1"
+   ```
+3. The PowerShell script will monitor your Downloads folder in real-time. Any new file added will trigger the Python script to organize the files
+
+# How It Works
+
+1. **Monitor Script (`monitor_downloads.ps1`)**:
+   - Uses the `FileSystemWatcher` class to monitor changes in the Downloads folder.
+   - Triggers the Python script when changes are detected.
+
+2. **Sorter Script (`sortDownloads.py`)**:
+   - Moves files into subfolders based on their file extensions.
+   - Skips temporary or system files (e.g., `.tmp`).
+## Customization
+
+- To ignore additional file types, update the `ignored_extensions` list in `sortDownloads.py`.
+- Modify the folder monitored by updating `$folderToMonitor` in `monitor_downloads.ps1`.
+
+---
+
+## Automating the Program
+Still testing this. I think the way to do this is with windows Task Scheduler
+
+
